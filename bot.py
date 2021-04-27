@@ -18,14 +18,6 @@ client = discord.Client(intents=intents)
 bot = commands.Bot(command_prefix='$')
 
 kicking_users = []
-# class MyClient(discord.Client):
-#     async def on_message(self, message):
-#         if message.author == self.user:
-#             return
-
-#         if message.content.startswith('$hello'):
-#             await message.channel.send('Hello World!')
-
 channel = 'dota-content'
 
 
@@ -68,28 +60,28 @@ async def on_message(message):
     #             if (member.name == 'Reanu Keeves'):
     #                 await member.move_to(None)    
 
-@bot.command()
-async def kick(ctx, target_user:discord.User):
+# @bot.command()
+# async def kick(ctx, target_user:discord.User):
 
-    # await require_lower_permissions(ctx, target_user, bot)
+#     # await require_lower_permissions(ctx, target_user, bot)
 
-    if target_user in kicking_users:
-        await ctx.send("There is already a kick vote on `{}`!".format(target_user))
-        return 
+#     if target_user in kicking_users:
+#         await ctx.send("There is already a kick vote on `{}`!".format(target_user))
+#         return 
 
-    # add to kicking_users
-    kicking_users.append(target_user)
+#     # add to kicking_users
+#     kicking_users.append(target_user)
 
-    vote_passed = await take_vote(ctx, "Kick `{}`?\n⚠ NOTE: Can't kick users with an equal or higher role.".format(target_user), KICK_VOTE_TIME, MIN_KICK_VOTERS)
+#     vote_passed = await take_vote(ctx, "Kick `{}`?\n⚠ NOTE: Can't kick users with an equal or higher role.".format(target_user), KICK_VOTE_TIME, MIN_KICK_VOTERS)
 
-    if vote_passed:
-        try:
-            await ctx.guild.kick(target_user)
-            await ctx.send("👢 Kicked `{}`.".format(target_user))
-        except discord.ext.commands.errors.CommandInvokeError:
-            await error_admin_targeted(ctx)
+#     if vote_passed:
+#         try:
+#             await ctx.guild.kick(target_user)
+#             await ctx.send("👢 Kicked `{}`.".format(target_user))
+#         except discord.ext.commands.errors.CommandInvokeError:
+#             await error_admin_targeted(ctx)
 
-    kicking_users.remove(target_user)
+#     kicking_users.remove(target_user)
 client.run(TOKEN)
 
 
